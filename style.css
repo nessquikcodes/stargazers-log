@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  background: #f6f8fa;
+  color: #1f2328;
+  font-family: system-ui, sans-serif;
+}
+
+.container {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+#repository-list {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.repository,
+.status {
+  padding: 1rem;
+  border: 1px solid #d1d9e0;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.repository a {
+  color: #0969da;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.repository a:hover {
+  text-decoration: underline;
+}
+
+.repository p {
+  margin: 0.5rem 0;
+}
+
+.repository time {
+  color: #59636e;
+  font-size: 0.875rem;
+}
+
+.status {
+  color: #59636e;
+}
