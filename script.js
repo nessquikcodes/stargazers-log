@@ -1,12 +1,31 @@
 const repositoryList = document.querySelector("#repository-list");
+const searchInput = document.querySelector("#repository-search");
+let allRepositories = [];
 
-function renderRepositories(repositories) {
+function showSearchResults() {
+  const query = searchInput.value.trim().toLowerCase();
+
+  const matchingRepositories = allRepositories.filter((repository) =>
+    `${repository.name} ${repository.description}`
+      .toLowerCase()
+      .includes(query)
+  );
+
+  renderRepositories(
+    matchingRepositories,
+    query ? "No repositories match your search." : "No starred repositories yet."
+  );
+}
+
+searchInput.addEventListener("input", showSearchResults);
+
+function renderRepositories(repositories, emptyMessage) {
   repositoryList.replaceChildren();
 
   if (repositories.length == 0) {
     const emptyState = document.createElement("li");
     emptyState.className = "status";
-    emptyState.textContent = "No starred repositories yet.";
+    emptyState.textContent = emptyMessage;
     repositoryList.append(emptyState);
     return;
   }
@@ -81,7 +100,8 @@ async function loadRepositories() {
       throw new Error("Repository data contains an invalid record");
     }
 
-    renderRepositories(repositories);
+    allRepositories = repositories;
+    showSearchResults();
   } catch (error) {
     console.error("Could not load starred repositories:", error);
     const status = document.createElement("li");
